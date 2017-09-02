@@ -1,15 +1,18 @@
-package br.puc.pss.observer;
+package br.puc.pss.observer.main;
+
+import br.puc.pss.observer.observers.AcoesLogger;
+import br.puc.pss.observer.observers.GraficoBarras;
+import br.puc.pss.observer.subject.CarteiraAcoes;
 
 public class Main {
 
 	public static void main(String[] args) {
-
-		GraficoBarras graficoBarras = new GraficoBarras();
-		AcoesLogger acoesLogger = new AcoesLogger();
+		
 		CarteiraAcoes carteiraAcoes = new CarteiraAcoes();
-		carteiraAcoes.addObservador(graficoBarras);
-		carteiraAcoes.addObservador(acoesLogger);
-
+		GraficoBarras graficoBarras = new GraficoBarras(carteiraAcoes);
+		AcoesLogger acoesLogger = new AcoesLogger(carteiraAcoes);
+		
+		
 		try {
 			carteiraAcoes.adcionarAcoes("COMP02", 200);
 			Thread.sleep(2000);

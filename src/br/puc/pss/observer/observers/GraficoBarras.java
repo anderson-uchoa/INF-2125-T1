@@ -1,4 +1,5 @@
-package br.puc.pss.observer;
+package br.puc.pss.observer.observers;
+
 import java.awt.Color;
 import java.awt.Paint;
 
@@ -15,43 +16,49 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.StandardBarPainter;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-public class GraficoBarras implements Observador {
+import br.puc.pss.observer.subject.CarteiraAcoes;
 
+public class GraficoBarras implements IObserver {
+
+	private CarteiraAcoes carteiraAcoes;
 	private DefaultCategoryDataset dataset;
-	private JFrame frame = new JFrame();
+	private JFrame frame;
 
-	public GraficoBarras() {
+	public GraficoBarras(CarteiraAcoes carteiraAcoes) {
+		this.carteiraAcoes = carteiraAcoes;
+		this.carteiraAcoes.registrarObservador(this);
+		criarGrafico();
+		
+	}
+
+	public void criarGrafico() {
 		dataset = new DefaultCategoryDataset();
+		frame = new JFrame();
 		JFreeChart chart = ChartFactory.createBarChart("Carteira de Ações", "Siglas", "Quantidade", dataset,
 				PlotOrientation.VERTICAL, false, true, false);
 		ChartPanel chartPanel = new ChartPanel(chart);
-		
+
 		CategoryPlot plot = chart.getCategoryPlot();
 		plot.setBackgroundPaint(Color.white);
 		plot.setDomainGridlinePaint(Color.white);
 		plot.setRangeGridlinePaint(Color.white);
 		plot.setOutlineVisible(false);
-		
-		BarRenderer renderer = (BarRenderer)plot.getRenderer();  
+
+		BarRenderer renderer = (BarRenderer) plot.getRenderer();
 		renderer.setGradientPaintTransformer(null);
 		renderer.setBarPainter(new StandardBarPainter());
-	
+
 		renderer.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator());
 		renderer.setBaseItemLabelsVisible(true);
-		
-		Paint[] colors = new Paint[] {
-		                  new Color(0, 172, 178),      // blue
-		                  new Color(239, 70, 55),      // red
-		                  new Color(85, 177, 69)
-		                  };       // green
-		
-		
+
+		Paint[] colors = new Paint[] { new Color(0, 172, 178), // blue
+				new Color(239, 70, 55), // red
+				new Color(85, 177, 69) }; // green
+
 		// change the default colors
-				for (int i = 0; i < 4; i++) {
-				    renderer.setSeriesPaint(i, colors[i % colors.length]);
-				}
-		
-		
+		for (int i = 0; i < 4; i++) {
+			renderer.setSeriesPaint(i, colors[i % colors.length]);
+		}
 
 		frame.setContentPane(chartPanel);
 		frame.setSize(700, 500);

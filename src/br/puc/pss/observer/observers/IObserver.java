@@ -1,6 +1,6 @@
-package br.puc.pss.observer;
+package br.puc.pss.observer.observers;
 
-public interface Observador {
+public interface IObserver {
 
 	public void mudancaQuantidade(String acao, Integer quantidade);
 
