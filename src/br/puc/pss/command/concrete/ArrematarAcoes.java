@@ -1,5 +1,6 @@
-package br.puc.pss.command.command;
+package br.puc.pss.command.concrete;
 
+import br.puc.pss.command.command.ICommand;
 import br.puc.pss.command.receiver.Acoes;
 
 public class ArrematarAcoes implements ICommand {

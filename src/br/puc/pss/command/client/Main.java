@@ -1,11 +1,10 @@
 package br.puc.pss.command.client;
 
-import br.puc.pss.command.command.ArrematarAcoes;
-import br.puc.pss.command.command.ComprarAcoes;
-import br.puc.pss.command.command.DoarAcoes;
-import br.puc.pss.command.command.ICommand;
-import br.puc.pss.command.command.LeiloarAcoes;
-import br.puc.pss.command.command.VenderAcoes;
+import br.puc.pss.command.concrete.ArrematarAcoes;
+import br.puc.pss.command.concrete.ComprarAcoes;
+import br.puc.pss.command.concrete.DoarAcoes;
+import br.puc.pss.command.concrete.LeiloarAcoes;
+import br.puc.pss.command.concrete.VenderAcoes;
 import br.puc.pss.command.invoker.Investidor;
 import br.puc.pss.command.receiver.Acoes;
 
